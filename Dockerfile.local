@@ -1,0 +1,12 @@
+FROM alpine:3.13
+
+LABEL MAINTAINER="hulining loserkid@163.com" \
+    URL="https://github.com/hulining/golang-study-notes"
+
+COPY main /main
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk add --no-cache curl ca-certificates iproute2 && \
+    chmod a+x /main
+
+ENTRYPOINT ["/main"]
